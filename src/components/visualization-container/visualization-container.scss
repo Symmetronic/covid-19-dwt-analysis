@@ -1,0 +1,13 @@
+:host {
+  background-color: color(light);
+  border-radius: $border-radius-3;
+  box-shadow: $box-shadow-1;
+  box-sizing: border-box;
+  display: block;
+  padding: $spacing-small;
+  width: 100%;
+
+  & > div {
+    overflow: hidden;
+  }
+}

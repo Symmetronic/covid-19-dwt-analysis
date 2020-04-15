@@ -1,0 +1,65 @@
+/* Reset page. */
+@import 'tachyons-sass/scss/normalize';
+
+/* Refine box sizing. */
+@import 'tachyons-sass/scss/box-sizing';
+
+/* Responsive images. */
+@import 'tachyons-sass/scss/images';
+
+/* Fonts. */
+@import 'fonts';
+
+/* General settings. */
+body {
+  background-color: color(light-gray);
+  color: color(dark);
+  margin: $spacing-none;
+  padding: $spacing-none;
+}
+
+/* Font. */
+body, button, html, text, input, textarea {
+  font-family: $font-family;
+  font-size: 100%;
+  line-height: $line-height-copy;
+}
+
+/* Headings. */
+h1, h2, h3, h4, h5, h6 {
+  color: color(dark-gray);
+  line-height: $line-height-title;
+  font-weight: bold;
+}
+h1 {
+  font-size: $font-size-2;
+  text-align: center;
+}
+
+/* Progress Bar. */
+strc-progress-bar {
+  --strc-progress-bar-color: #{color(primary)};
+  --strc-progress-bar-background-color: transparent;
+}
+
+/* Scaleogram. */
+strc-scaleogram {
+  --strc-scaleogram-height: #{$height-5};
+  --strc-scaleogram-label-color: #{color(dark)};
+  --strc-scaleogram-legend-width: #{$width-4};
+}
+
+/* Fade out animation. */
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.fade-out {
+  animation-duration: duration(immediate);
+  animation-fill-mode: forwards;
+  animation-name: fadeOut;
+  animation-timing-function: ease-in-out;
+}

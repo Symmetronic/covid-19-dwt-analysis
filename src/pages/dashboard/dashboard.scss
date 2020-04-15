@@ -1,0 +1,30 @@
+page-dashboard {
+  & > div {
+    padding: $spacing-small;
+
+    @media #{$breakpoint-medium} {
+      padding: $spacing-medium;
+    }
+
+    .grid {
+      @media #{$breakpoint-large} {
+        $spacing: $spacing-medium;
+
+        column-gap: $spacing;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        margin: $spacing-none auto;
+        max-width: $max-width-9;
+        row-gap: $spacing;
+      }
+
+      visualization-container {
+        margin-bottom: $spacing-medium;
+
+        @media #{$breakpoint-large} {
+          margin: $spacing-none;
+        }
+      }
+    }
+  }
+}

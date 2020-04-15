@@ -1,0 +1,13 @@
+/// Returns the color for a given color name.
+/// @param  $colorName The color name.
+/// @return            The color.
+@function color($colorName) {
+  @return map-get($colors, $colorName);
+}
+  
+/// Returns the duration for a wanted perception.
+/// @param  $perceptionName The wanted perception property.
+/// @return                 The duration.
+@function duration($perceptionName) {
+  @return map-get($durations, $perceptionName);
+}

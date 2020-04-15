@@ -1,0 +1,9 @@
+vega-visualization {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+
+  & > div {
+    width: 100%;
+  }
+}

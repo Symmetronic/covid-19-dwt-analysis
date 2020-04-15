@@ -1,0 +1,39 @@
+/**
+ * Roboto.
+ **/
+/* Regular. */
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    src: url(/assets/roboto/roboto-latin-400.woff2) format('woff2'),
+      url(/assets/roboto/roboto-latin-400.woff) format('woff');
+  }
+  
+  /* Italic. */
+  @font-face {
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: normal;
+    src: url(/assets/roboto/roboto-latin-400italic.woff2) format('woff2'),
+      url(/assets/roboto/roboto-latin-400italic.woff) format('woff');
+  }
+  
+  /* Bold. */
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    src: url(/assets/roboto/roboto-latin-700.woff2) format('woff2'),
+      url(/assets/roboto/roboto-latin-700.woff) format('woff');
+  }
+  
+  /* Bold Italic. */
+  @font-face {
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: bold;
+    src: url(/assets/roboto/roboto-latin-700italic.woff2) format('woff2'),
+      url(/assets/roboto/roboto-latin-700italic.woff) format('woff');
+  }
+  

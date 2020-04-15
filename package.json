@@ -1,0 +1,41 @@
+{
+  "name": "covid-19-dwt-analysis",
+  "private": true,
+  "author": "Simon Hochholzer <simon@symmetronic.com>",
+  "version": "0.1.0",
+  "description": "Analysis of COVID-19 pandemic evolution using discrete wavelet transform.",
+  "scripts": {
+    "build": "stencil build",
+    "generate": "stencil generate",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test:watch": "stencil test --spec --e2e --watchAll"
+  },
+  "devDependencies": {
+    "@stencil/core": "^1.12.2",
+    "@stencil/router": "^1.0.1",
+    "@stencil/sass": "^1.3.1",
+    "@types/jest": "24.9.1",
+    "@types/puppeteer": "2.0.1",
+    "jest": "24.9.0",
+    "jest-cli": "24.9.0",
+    "puppeteer": "2.1.1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@stencil/redux": "^0.1.2",
+    "discrete-wavelets": "^3.0.0",
+    "exact-linspace": "^1.0.0",
+    "interp1": "^1.0.5",
+    "lodash": "^4.17.15",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "strc-progress-bar": "^2.0.4",
+    "tachyons-sass": "^4.9.5",
+    "typeface-roboto": "0.0.75",
+    "vega": "^5.10.1",
+    "vega-embed": "^6.5.2",
+    "vega-lite": "^4.10.2"
+  }
+}
