@@ -2,6 +2,8 @@
 
 Analysis of COVID-19 pandemic evolution using discrete wavelet transform.
 
+<!-- TODO: Autodeploy to GitHub pages -->
+
 <!-- TODO: Update icon -->
 
 ## NPM Scripts
