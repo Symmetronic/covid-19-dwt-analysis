@@ -12,7 +12,7 @@ commit() {
 }
 
 push() {
-  git push -f -q https://strc-covid-19-dwt-analysis-ci:${GH_TOKEN}@github.com/Symmetronic/covid-19-dwt-analysis.git master >/dev/null 2>&1
+  git push -f -q https://${GH_TOKEN}@github.com/Symmetronic/covid-19-dwt-analysis.git master >/dev/null 2>&1
 }
 
 config
