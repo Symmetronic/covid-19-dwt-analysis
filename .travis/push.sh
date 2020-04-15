@@ -12,6 +12,7 @@ commit() {
 }
 
 push() {
+  git remote remove origin
   git remote add origin https://${GH_TOKEN}@github.com/Symmetronic/covid-19-dwt-analysis.git > /dev/null 2>&1
   git push --quiet --set-upstream origin master > /dev/null 2>&1
 }
