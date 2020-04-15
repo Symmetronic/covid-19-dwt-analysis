@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - 12
+install:
+  - npm --prefix ./update install ./update
+script:
+  - npm --prefix ./update start
+after_success:
+  - .travis/push.sh
