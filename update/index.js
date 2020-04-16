@@ -70,7 +70,7 @@ async function main() {
     const points = Object.keys(data)
         .map(key => {
           return [
-            moment(key, DATE_FORMAT).unix(), // Unix time stamp
+            moment.utc(key, DATE_FORMAT).unix(), // Unix time stamp
             data[key], // Number of cases
           ];
         })
