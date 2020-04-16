@@ -96,10 +96,6 @@ export function timeSeriesSpec(
                 field: VALUE,
                 type: 'quantitative',
               },
-              tooltip: {
-                field: VALUE,
-                type: 'quantitative',
-              },
             },
           },
         ],
