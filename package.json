@@ -2,7 +2,7 @@
   "name": "covid-19-dwt-analysis",
   "private": true,
   "author": "Simon Hochholzer <simon@symmetronic.com>",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Analysis of COVID-19 pandemic evolution using discrete wavelet transform.",
   "scripts": {
     "build": "npm run update-data && stencil build",
@@ -10,12 +10,12 @@
     "postinstall": "npm --prefix ./update install ./update",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
+    "test:jekyll": "npm run build && jekyll serve --source www/covid-19-dwt-analysis --destination www/covid-19-dwt-analysis/_site --safe",
     "test:watch": "stencil test --spec --e2e --watchAll",
     "update-data": "npm --prefix ./update start"
   },
   "devDependencies": {
-    "@stencil/core": "^1.12.2",
-    "@stencil/router": "^1.0.1",
+    "@stencil/core": "^1.12.4",
     "@stencil/sass": "^1.3.1",
     "@types/jest": "24.9.1",
     "@types/puppeteer": "2.0.1",
@@ -35,9 +35,8 @@
     "redux-thunk": "^2.3.0",
     "strc-progress-bar": "^2.0.4",
     "tachyons-sass": "^4.9.5",
-    "typeface-roboto": "0.0.75",
     "vega": "^5.10.1",
-    "vega-embed": "^6.5.2",
-    "vega-lite": "^4.10.2"
+    "vega-embed": "^6.6.0",
+    "vega-lite": "^4.10.4"
   }
 }

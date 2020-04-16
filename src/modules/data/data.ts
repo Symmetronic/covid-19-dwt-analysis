@@ -8,7 +8,7 @@ import { Point } from './point/point';
 /**
  * Path of the data file.
  */
-const DATA_PATH: string = '/assets/data/data.json';
+const DATA_PATH: string = './assets/data/data.json';
 
 /**
  * Collection of data related methods.

@@ -174,15 +174,7 @@ export class AppRoot {
           progress={progress}
         />
 
-        <stencil-router>
-          <stencil-route-switch>
-            <stencil-route
-              component='page-dashboard'
-              exact={true}
-              url='/'
-            />
-          </stencil-route-switch>
-        </stencil-router>
+        <page-dashboard />
       </div>
     );
   }

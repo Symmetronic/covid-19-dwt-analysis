@@ -9,6 +9,7 @@ describe('app-root', () => {
   let page: E2EPage;
 
   beforeEach(async () => {
+    // TODO: Fix test
     page = await newE2EPage({ url: '/' });
     
     element = await page.find('app-root');

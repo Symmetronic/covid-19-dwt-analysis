@@ -19,17 +19,15 @@
 ### Depends on
 
 - strc-progress-bar
-- stencil-router
-- stencil-route-switch
-- stencil-route
+- [page-dashboard](../pages/dashboard)
 
 ### Graph
 ```mermaid
 graph TD;
   app-root --> strc-progress-bar
-  app-root --> stencil-router
-  app-root --> stencil-route-switch
-  app-root --> stencil-route
+  app-root --> page-dashboard
+  page-dashboard --> visualization-container
+  page-dashboard --> vega-visualization
   style app-root fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

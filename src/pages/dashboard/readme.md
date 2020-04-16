@@ -16,6 +16,10 @@
 
 ## Dependencies
 
+### Used by
+
+ - [app-root](../../app)
+
 ### Depends on
 
 - [visualization-container](../../components/visualization-container)
@@ -26,6 +30,7 @@
 graph TD;
   page-dashboard --> visualization-container
   page-dashboard --> vega-visualization
+  app-root --> page-dashboard
   style page-dashboard fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
