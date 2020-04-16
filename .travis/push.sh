@@ -1,7 +1,7 @@
 #!/bin/sh
 
 config() {
-  git config --global user.email "travis@travis-ci.org"
+  git config --global user.email "strc-covid-19-dwt-analysis-ci@symmetronic.com"
   git config --global user.name "Travis CI"
 }
 
