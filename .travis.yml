@@ -12,6 +12,6 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
-  local_dir: www/
+  local_dir: www/covid-19-dwt-analysis/
   on:
     branch: master
