@@ -2,8 +2,16 @@ language: node_js
 node_js:
   - 12
 install:
-  - npm --prefix ./update install ./update
+  - npm install
 script:
-  - npm --prefix ./update start
+  - npm run build
 after_success:
-  - .travis/push.sh
+  - .travis/update-data.sh
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: www/
+  on:
+    branch: master
