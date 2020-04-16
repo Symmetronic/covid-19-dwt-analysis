@@ -14,6 +14,7 @@ const dependencies = [
   { src: 'typeface-roboto/files', dest: 'roboto' },
 ];
 const copy = [
+  { src: 'jekyll', dest: '.' },
   ...dependencies.map(dependency => {
     return { src: root + nm + dependency.src, dest: assets + dependency.dest };
   }),
@@ -32,7 +33,7 @@ export const config: Config = {
       type: 'www',
       // comment the following line to disable service workers in production
       serviceWorker: null,
-      baseUrl: 'https://symmetronic.github.io/covid-19-dwt-analysis/',
+      baseUrl: 'https://symmetronic.github.io/',
     },
   ],
   plugins: [
