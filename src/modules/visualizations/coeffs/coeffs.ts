@@ -63,6 +63,9 @@ export function coeffsSpec(coeffs: number[][]): any {
             field: VALUE,
             type: 'quantitative',
           },
+          color: {
+            value: '#333',
+          },
           tooltip: {
             field: VALUE,
             type: 'quantitative',
@@ -85,6 +88,9 @@ export function coeffsSpec(coeffs: number[][]): any {
           y: {
             field: REL_CUMUL_ENERGY,
             type: 'quantitative',
+          },
+          color: {
+            value: '#333',
           },
         },
       },

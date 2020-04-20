@@ -2,8 +2,7 @@ import { Point } from "../../data/data";
 
 const X_END: string = 'xEnd';
 const X_START: string = 'xStart';
-const Y_END: string = 'yEnd';
-const Y_START: string = 'yStart';
+const LEVEL_OF_TRANSFORM = 'Level of Transform'
 const SCALE: string = 'Scale';
 const TIME: string = 'Time';
 const VALUE: string = 'Value';
@@ -48,21 +47,32 @@ export function timeSeriesSpec(
                   end: new Date(2020, 3, 20, 0, 0, 0, 0),
                   rule: '1st curfew laws',
                 },
-                // {
-                //   start: new Date(2020, 3, 20, 0, 0, 0, 0),
-                //   end: new Date(2020, 4, 3, 0, 0, 0, 0),
-                //   rule: '2nd curfew laws',
-                // },
-              ],
+                {
+                  start: new Date(2020, 3, 20, 0, 0, 0, 0),
+                  end: new Date(2020, 4, 3, 0, 0, 0, 0),
+                  rule: '2nd curfew laws',
+                },
+              ].map(value => {
+                return {
+                  ...value,
+                  end: Math.min(Date.now(), value.end.getTime()),
+                };
+              }),
             },
             mark: {
               type: 'rect',
-              opacity: 0.3,
+              opacity: 0.5,
             },
             encoding: {
               x: {
                 field: 'start',
                 type: 'temporal',
+                scale: {
+                  domain: [
+                    1000 * timeSeries[0][0],
+                    Date.now(),
+                  ]
+                }
               },
               x2: {
                 field: 'end',
@@ -149,9 +159,6 @@ export function timeSeriesSpec(
         mark: 'rect',
         data: {
           values: coeffs.reverse().reduce((values, level, index) => {
-            // TODO: Solve y axis more elegantly
-            const yStart: number = Math.pow(2, index);
-            const yEnd: number = Math.pow(2, index + 1);
             const scale: number = (maxTime - minTime) / level.length;
             for (let i: number = 0; i < level.length; i++) {
               const coeff: number = level[i];
@@ -159,8 +166,7 @@ export function timeSeriesSpec(
               value[X_START] = new Date(1000 * (i * scale + minTime));
               value[X_END] = new Date(1000 * ((i + 1) * scale + minTime));
               value[SCALE] = scale;
-              value[Y_START] = yStart;
-              value[Y_END] = yEnd;
+              value[LEVEL_OF_TRANSFORM] = index + 1;
               value[VALUE] = coeff;
               values.push(value);
             }
@@ -184,20 +190,11 @@ export function timeSeriesSpec(
             field: X_END,
           },
           y: {
-            // TODO: Period is not 100% comparable to days due to interpolation. Think about how to communicate this!
             axis: {
-              title: 'Period',
+              title: 'Level of Transform',
             },
-            field: Y_START,
-            type: 'quantitative',
-            scale: {
-              type: 'log',
-              base: 2,
-              reverse: true,
-            },
-          },
-          y2: {
-            field: Y_END,
+            field: LEVEL_OF_TRANSFORM,
+            type: 'ordinal',
           },
           color: {
             field: VALUE,
@@ -206,9 +203,8 @@ export function timeSeriesSpec(
               title: null,
             },
             scale: {
-              scheme: 'blueorange',
+              scheme: 'purplegreen',
               domainMid: 0,
-              reverse: true,
             },
           },
         }
