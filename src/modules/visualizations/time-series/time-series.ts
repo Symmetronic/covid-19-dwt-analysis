@@ -42,6 +42,42 @@ export function timeSeriesSpec(
         layer: [
           {
             data: {
+              values: [
+                {
+                  start: new Date(2020, 2, 23, 0, 0, 0, 0),
+                  end: new Date(2020, 3, 20, 0, 0, 0, 0),
+                  rule: '1st curfew laws',
+                },
+                // {
+                //   start: new Date(2020, 3, 20, 0, 0, 0, 0),
+                //   end: new Date(2020, 4, 3, 0, 0, 0, 0),
+                //   rule: '2nd curfew laws',
+                // },
+              ],
+            },
+            mark: {
+              type: 'rect',
+              opacity: 0.3,
+            },
+            encoding: {
+              x: {
+                field: 'start',
+                type: 'temporal',
+              },
+              x2: {
+                field: 'end',
+              },
+              color: {
+                field: 'rule',
+                legend: {
+                  title: null,
+                },
+                type: 'nominal',
+              },
+            },
+          },
+          {
+            data: {
               values: timeSeries.map(point => {
                 let value: any = {};
                 value[TIME] = new Date(1000 * point[0]);
@@ -52,7 +88,7 @@ export function timeSeriesSpec(
             mark: {
               type: 'point',
               filled: true,
-              size: 30,
+              size: 20,
             },
             encoding: {
               x: {
@@ -65,6 +101,9 @@ export function timeSeriesSpec(
                 },
                 field: VALUE,
                 type: 'quantitative',
+              },
+              color: {
+                value: '#333',
               },
             },
           },
@@ -97,6 +136,9 @@ export function timeSeriesSpec(
               y: {
                 field: VALUE,
                 type: 'quantitative',
+              },
+              color: {
+                value: '#333',
               },
             },
           },
