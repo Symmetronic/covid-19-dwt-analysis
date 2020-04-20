@@ -21,6 +21,12 @@ export namespace Components {
          */
         "timeSeries": Point[];
     }
+    interface GithubCorner {
+        /**
+          * URL to link to.
+         */
+        "href": string;
+    }
     interface PageDashboard {
         /**
           * Wavelet coefficients.
@@ -55,6 +61,12 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLGithubCornerElement extends Components.GithubCorner, HTMLStencilElement {
+    }
+    var HTMLGithubCornerElement: {
+        prototype: HTMLGithubCornerElement;
+        new (): HTMLGithubCornerElement;
+    };
     interface HTMLPageDashboardElement extends Components.PageDashboard, HTMLStencilElement {
     }
     var HTMLPageDashboardElement: {
@@ -75,6 +87,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-root": HTMLAppRootElement;
+        "github-corner": HTMLGithubCornerElement;
         "page-dashboard": HTMLPageDashboardElement;
         "vega-visualization": HTMLVegaVisualizationElement;
         "visualization-container": HTMLVisualizationContainerElement;
@@ -94,6 +107,12 @@ declare namespace LocalJSX {
           * The time series data.
          */
         "timeSeries"?: Point[];
+    }
+    interface GithubCorner {
+        /**
+          * URL to link to.
+         */
+        "href"?: string;
     }
     interface PageDashboard {
         /**
@@ -123,6 +142,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "app-root": AppRoot;
+        "github-corner": GithubCorner;
         "page-dashboard": PageDashboard;
         "vega-visualization": VegaVisualization;
         "visualization-container": VisualizationContainer;
@@ -133,6 +153,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "github-corner": LocalJSX.GithubCorner & JSXBase.HTMLAttributes<HTMLGithubCornerElement>;
             "page-dashboard": LocalJSX.PageDashboard & JSXBase.HTMLAttributes<HTMLPageDashboardElement>;
             "vega-visualization": LocalJSX.VegaVisualization & JSXBase.HTMLAttributes<HTMLVegaVisualizationElement>;
             "visualization-container": LocalJSX.VisualizationContainer & JSXBase.HTMLAttributes<HTMLVisualizationContainerElement>;

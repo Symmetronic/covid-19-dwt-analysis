@@ -169,12 +169,20 @@ export class AppRoot {
 
     return (
       <div>
+        <github-corner
+          href='https://github.com/Symmetronic/covid-19-dwt-analysis/'
+        />
+
         <strc-progress-bar
           class={(progress < 1) ? null : 'fade-out'}
           progress={progress}
         />
 
-        <page-dashboard />
+        <div
+          class='content'
+        >
+          <page-dashboard />
+        </div>
       </div>
     );
   }

@@ -4,6 +4,7 @@ import {
   newE2EPage,
 } from '@stencil/core/testing';
 
+// TODO: Fix test
 describe('visualization-container', () => {
   let element: E2EElement;
   let page: E2EPage;

@@ -3,4 +3,8 @@ app-root {
     position: fixed;
     z-index: 6;
   }
+
+  .content {
+    margin-top: $spacing-medium;
+  }
 }

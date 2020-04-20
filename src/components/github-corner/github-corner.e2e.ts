@@ -1,15 +1,15 @@
 import { newE2EPage } from '@stencil/core/testing';
 
 // TODO: Fix test
-describe('VegaVisualization', () => {
-  let element: HTMLVegaVisualizationElement;
+describe('GitHubCorner', () => {
+  let element: HTMLGithubCornerElement;
   let page: any;
 
   beforeEach(async () => {
     page = await newE2EPage();
-    await page.setContent('<vega-visualization />');
+    await page.setContent('<github-corner />');
 
-    element = await page.find('vega-visualization');
+    element = await page.find('github-corner');
   });
 
   it('renders', async () => {
