@@ -33,10 +33,7 @@ export class GitHubCorner {
           style={{
             fill: '#151513',
             color: '#fff',
-            position: 'absolute',
-            top: '0',
             border: '0',
-            right: '0',
           }}
           viewBox='0 0 250 250'
           width='80'
