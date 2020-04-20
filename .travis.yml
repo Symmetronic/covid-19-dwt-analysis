@@ -4,9 +4,11 @@ node_js:
 install:
   - npm install
 script:
-  - npm run build
+  - npm test
 after_success:
+  - npm run update-data
   - .travis/update-data.sh
+  - npm run build
 deploy:
   provider: pages
   skip_cleanup: true
