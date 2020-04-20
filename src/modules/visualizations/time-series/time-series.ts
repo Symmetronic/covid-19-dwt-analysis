@@ -33,7 +33,6 @@ export function timeSeriesSpec(
   return {
     '$schema': 'https://vega.github.io/schema/vega-lite/v4.json',
     vconcat: [
-      // TODO: Improve axes labels
       {
         autosize: {
           type: 'fit',
@@ -61,6 +60,9 @@ export function timeSeriesSpec(
                 type: 'temporal',
               },
               y: {
+                axis: {
+                  title: 'New Infections',
+                },
                 field: VALUE,
                 type: 'quantitative',
               },
@@ -126,7 +128,7 @@ export function timeSeriesSpec(
         encoding: {
           x: {
             axis: {
-              title: 'Time',
+              title: 'Date',
             },
             field: X_START,
             type: 'temporal',
@@ -140,6 +142,7 @@ export function timeSeriesSpec(
             field: X_END,
           },
           y: {
+            // TODO: Period is not 100% comparable to days due to interpolation. Think about how to communicate this!
             axis: {
               title: 'Period',
             },

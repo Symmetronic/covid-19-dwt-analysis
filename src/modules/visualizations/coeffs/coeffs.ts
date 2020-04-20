@@ -57,6 +57,9 @@ export function coeffsSpec(coeffs: number[][]): any {
             type: 'quantitative',
           },
           y: {
+            axis: {
+              title: 'Coefficient Value'
+            },
             field: VALUE,
             type: 'quantitative',
           },
