@@ -67,7 +67,7 @@ async function main() {
 
     /* Parse data. */
     const data = parseData(csv);
-    const points = Object.keys(data)
+    const totalInfections = Object.keys(data)
         .map(key => {
           return [
             moment.utc(key, DATE_FORMAT).unix(), // Unix time stamp
@@ -76,9 +76,18 @@ async function main() {
         })
         /* Sort by timestamp. */
         .sort((a, b) => a[0] - b[0]);
+    
+    /* Calculate new infections per day. */
+    const newInfections = totalInfections.map((point, index) => {
+      const deltaInfections = (index === 0)
+          ? point[1]
+          : point[1] - totalInfections[index - 1][1];
+      
+      return [point[0], deltaInfections];
+    });
 
     /* Save data to file. */
-    saveData(points);
+    saveData(newInfections);
     console.log('Successfully updated data.');
   } catch(error) {
     console.error(error);
