@@ -45,13 +45,18 @@ export function timeSeriesSpec(
                 {
                   start: new Date(2020, 2, 23, 0, 0, 0, 0),
                   end: new Date(2020, 3, 20, 0, 0, 0, 0),
-                  rule: '1st curfew laws',
+                  rule: 'curfew laws',
                 },
                 {
                   start: new Date(2020, 3, 20, 0, 0, 0, 0),
-                  end: new Date(2020, 4, 3, 0, 0, 0, 0),
-                  rule: '2nd curfew laws',
+                  end: new Date(2020, 4, 4, 0, 0, 0, 0),
+                  rule: '1st deregulations',
                 },
+                {
+                  start: new Date(2020, 4, 4, 0, 0, 0, 0),
+                  end: new Date(2020, 4, 20, 0, 0, 0, 0),
+                  rule: '2nd deregulations',
+                }
               ].map(value => {
                 return {
                   ...value,
