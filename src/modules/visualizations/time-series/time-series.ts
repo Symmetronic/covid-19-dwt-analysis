@@ -103,7 +103,7 @@ export function timeSeriesSpec(
             mark: {
               type: 'point',
               filled: true,
-              size: 20,
+              size: 10,
             },
             encoding: {
               x: {
