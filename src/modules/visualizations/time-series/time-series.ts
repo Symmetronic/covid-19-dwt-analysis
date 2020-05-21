@@ -54,7 +54,7 @@ export function timeSeriesSpec(
                 },
                 {
                   start: new Date(2020, 4, 4, 0, 0, 0, 0),
-                  end: new Date(2020, 4, 20, 0, 0, 0, 0),
+                  end: new Date(),
                   rule: '2nd deregulations',
                 }
               ].map(value => {
