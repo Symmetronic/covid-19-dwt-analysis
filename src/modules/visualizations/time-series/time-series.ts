@@ -93,7 +93,7 @@ export function timeSeriesSpec(
           },
           {
             data: {
-              values: timeSeries.map(point => {
+              values: interpTimeSeries.map(point => {
                 let value: any = {};
                 value[TIME] = new Date(1000 * point[0]);
                 value[VALUE] = point[1];
@@ -103,7 +103,7 @@ export function timeSeriesSpec(
             mark: {
               type: 'point',
               filled: true,
-              size: 10,
+              size: 15,
             },
             encoding: {
               x: {
@@ -124,7 +124,7 @@ export function timeSeriesSpec(
           },
           {
             data: {
-              values: interpTimeSeries.map(point => {
+              values: timeSeries.map(point => {
                 let value: any = {};
                 value[TIME] = new Date(1000 * point[0]);
                 value[VALUE] = point[1];
@@ -135,8 +135,9 @@ export function timeSeriesSpec(
               type: 'line',
             },
             selection: {
-              brush: {
+              grid: {
                 type: 'interval',
+                bind: 'scales',
                 encodings: ['x'],
               },
             },
@@ -187,7 +188,7 @@ export function timeSeriesSpec(
             type: 'temporal',
             scale: {
               domain: {
-                selection: 'brush',
+                selection: 'grid',
               },
             },
           },

@@ -41,10 +41,13 @@ export function coeffsSpec(coeffs: number[][]): any {
     vconcat: [
       {
         width: 'container',
-        mark: 'bar',
+        mark: {
+          type: 'bar',
+        },
         selection: {
-          brush: {
+          grid: {
             type: 'interval',
+            bind: 'scales',
             encodings: ['x'],
           },
         },
@@ -81,7 +84,7 @@ export function coeffsSpec(coeffs: number[][]): any {
             type: 'quantitative',
             scale: {
               domain: {
-                selection: 'brush',
+                selection: 'grid',
               },
             },
           },
