@@ -41,63 +41,6 @@ export function timeSeriesSpec(
         layer: [
           {
             data: {
-              values: [
-                {
-                  start: new Date(2020, 2, 23, 0, 0, 0, 0),
-                  end: new Date(2020, 3, 20, 0, 0, 0, 0),
-                  rule: 'curfew laws',
-                },
-                {
-                  start: new Date(2020, 3, 20, 0, 0, 0, 0),
-                  end: new Date(2020, 4, 4, 0, 0, 0, 0),
-                  rule: '1st deregulations',
-                },
-                {
-                  start: new Date(2020, 4, 4, 0, 0, 0, 0),
-                  end: new Date(2020, 5, 5, 0, 0, 0, 0),
-                  rule: '2nd deregulations',
-                },
-                {
-                  start: new Date(2020, 5, 5, 0, 0, 0, 0),
-                  end: new Date(2020, 5, 15, 0, 0, 0, 0),
-                  rule: '3rd deregulations',
-                }
-              ].map(value => {
-                return {
-                  ...value,
-                  end: Math.min(Date.now(), value.end.getTime()),
-                };
-              }),
-            },
-            mark: {
-              type: 'rect',
-              opacity: 0.5,
-            },
-            encoding: {
-              x: {
-                field: 'start',
-                type: 'temporal',
-                scale: {
-                  domain: [
-                    1000 * timeSeries[0][0],
-                    Date.now(),
-                  ]
-                }
-              },
-              x2: {
-                field: 'end',
-              },
-              color: {
-                field: 'rule',
-                legend: {
-                  title: null,
-                },
-                type: 'nominal',
-              },
-            },
-          },
-          {
-            data: {
               values: interpTimeSeries.map(point => {
                 let value: any = {};
                 value[TIME] = new Date(1000 * point[0]);
@@ -113,13 +56,22 @@ export function timeSeriesSpec(
             encoding: {
               x: {
                 field: TIME,
+                scale: {
+                  domain: [
+                    1000 * timeSeries[0][0],
+                    Date.now(),
+                  ]
+                },
                 type: 'temporal',
               },
               y: {
-                axis: {
-                  title: 'New Infections',
-                },
                 field: VALUE,
+                scale: {
+                  domain: [
+                    0,
+                    4/3 * Math.max(...timeSeries.map(point => point[1])),
+                  ]
+                },
                 type: 'quantitative',
               },
               color: {
@@ -162,6 +114,69 @@ export function timeSeriesSpec(
                 value: '#333',
               },
             },
+          },
+          {
+            data: {
+              values: [
+                {
+                  event: 'curfew laws',
+                  when: new Date(2020, 2, 23, 0, 0, 0, 0),
+                },
+                {
+                  event: '1st deregulations',
+                  when: new Date(2020, 3, 20, 0, 0, 0, 0),
+                },
+                {
+                  event: '2nd deregulations',
+                  when: new Date(2020, 4, 4, 0, 0, 0, 0),
+                },
+                {
+                  event: '3rd deregulations',
+                  when: new Date(2020, 5, 5, 0, 0, 0, 0),
+                },
+                {
+                  event: 'Corona app',
+                  when: new Date(2020, 5, 15, 0, 0, 0, 0),
+                },
+              ],
+            },
+            encoding: {
+              color: {
+                legend: null,
+                field: 'event',
+                type: 'nominal',
+              },
+              x: {
+                field: 'when',
+                type: 'temporal',
+              },
+            },
+            layer: [
+              {
+                mark: {
+                  type: 'rule',
+                  opacity: 1,
+                },
+              },
+              {
+                mark: {
+                  align: 'left',
+                  dx: 5,
+                  fontWeight: 100,
+                  type: 'text',
+                },
+                encoding: {
+                  angle: { value: -25 },
+                  text: {
+                    field: 'event',
+                    type: 'nominal',
+                  },
+                  y: {
+                    value: 50,
+                  },
+                },
+              },
+            ],
           },
         ],
       },
