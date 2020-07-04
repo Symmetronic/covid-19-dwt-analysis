@@ -65,6 +65,9 @@ export function timeSeriesSpec(
                 type: 'temporal',
               },
               y: {
+                axis: {
+                  title: 'New Infections',
+                },
                 field: VALUE,
                 scale: {
                   domain: [
