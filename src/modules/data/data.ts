@@ -38,8 +38,10 @@ export class Data {
       ys.push(point[1]);
     }
 
-    /* Determine number of sampling points as next lower power of two. */
-    const nrOfSamples: number = Math.pow(2, Math.floor(Math.log2(xs.length)));
+    /* Determine number of sampling points as next higher power of two
+     * according to: https://doi.org/10.1080/03610919708813391
+     */
+    const nrOfSamples: number = Math.pow(2, Math.ceil(Math.log2(xs.length)));
 
     /* Determine extrema. */
     const min: number = Math.min(...xs);
