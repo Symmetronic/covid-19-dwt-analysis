@@ -2,7 +2,7 @@ import { Component, h, Prop, Watch } from '@stencil/core';
 
 import { Store } from '@stencil/redux';
 
-import dwt from 'discrete-wavelets';
+import wt from '../modules/wavelet-transform/wavelet-transform';
 
 import {
   Data,
@@ -62,7 +62,7 @@ export class AppRoot {
 
     if (newValue) {
       const ys: number[] = newValue.map(val => val[1]);
-      coeffs = dwt.transform(ys);
+      coeffs = wt.wavedec(ys, 'haar', 'constant');
     }
 
     /* Update coefficients. */

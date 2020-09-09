@@ -26,7 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "@stencil/redux": "^0.1.2",
-    "discrete-wavelets": "^3.0.1",
+    "discrete-wavelets": "^5.0.0",
     "exact-linspace": "^1.0.0",
     "interp1": "^1.0.5",
     "lodash": "^4.17.19",

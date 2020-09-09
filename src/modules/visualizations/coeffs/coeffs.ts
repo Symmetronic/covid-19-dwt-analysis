@@ -1,5 +1,6 @@
-import dwt from 'discrete-wavelets';
 import _ from 'lodash';
+
+import wt from '../../wavelet-transform/wavelet-transform';
 
 const COEFF_NUMBER: string = 'Coefficient Number';
 const VALUE: string = 'Value';
@@ -16,12 +17,12 @@ export function coeffsSpec(coeffs: number[][]): any {
 
   /* Transform coefficients */
   const flatCoeffs: number[] = _.flatten(coeffs);
-  const totalEnergy: number = dwt.energy(coeffs);
+  const totalEnergy: number = wt.energy(coeffs);
 
   let transformedCoeffs: any[] = [];
   for (let i: number = 0; i < flatCoeffs.length; i++) {
     const coeff: number = flatCoeffs[i]
-    const relCoeffEnergy: number = dwt.energy([coeff]) / totalEnergy;
+    const relCoeffEnergy: number = wt.energy([coeff]) / totalEnergy;
     const relCumulEnergy: number = (i === 0)
         ? relCoeffEnergy
         : transformedCoeffs[i - 1][REL_CUMUL_ENERGY] + relCoeffEnergy;
