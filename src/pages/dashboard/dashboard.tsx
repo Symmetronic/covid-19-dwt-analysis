@@ -35,11 +35,6 @@ export class Dashboard {
   @Prop({ mutable: true }) coeffs: number[][];
 
   /**
-   * Interpolated time series data.
-   */
-  @Prop({ mutable: true }) interpTimeSeries: Point[];
-
-  /**
    * The app's data backend.
    */
   @Prop({ context: 'store' }) store: Store<RootState>;
@@ -64,12 +59,10 @@ export class Dashboard {
   initStore(): void {
     this.store.mapStateToProps(this, state => {
       const coeffs = state.data.coeffs;
-      const interpTimeSeries = state.data.interpTimeSeries;
       const timeSeries = state.data.timeSeries;
 
       return {
         coeffs,
-        interpTimeSeries,
         timeSeries,
       };
     });
@@ -86,12 +79,10 @@ export class Dashboard {
   /**
    * Updates the specification of the time series visualization.
    */
-  @Watch('interpTimeSeries')
   @Watch('timeSeries')
   updateTimeSeriesSpec(): void {
     this.timeSeriesSpec = timeSeriesSpec(
       this.timeSeries,
-      this.interpTimeSeries,
       this.coeffs,
     );
   }
@@ -104,7 +95,7 @@ export class Dashboard {
       <div>
         <h1>COVID-19 Discrete Wavelet Transform Analysis (Germany)</h1>
 
-        {(!this.timeSeries || !this.interpTimeSeries || !this.coeffs)
+        {(!this.timeSeriesSpec || !this.coeffsSpec)
           ? null
           : <div class='grid'>
               <visualization-container>

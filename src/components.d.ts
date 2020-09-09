@@ -13,10 +13,6 @@ export namespace Components {
          */
         "coeffs": number[][];
         /**
-          * The interpolated time series data.
-         */
-        "interpTimeSeries": Point[];
-        /**
           * The time series data.
          */
         "timeSeries": Point[];
@@ -32,10 +28,6 @@ export namespace Components {
           * Wavelet coefficients.
          */
         "coeffs": number[][];
-        /**
-          * Interpolated time series data.
-         */
-        "interpTimeSeries": Point[];
         /**
           * Time series data.
          */
@@ -100,10 +92,6 @@ declare namespace LocalJSX {
          */
         "coeffs"?: number[][];
         /**
-          * The interpolated time series data.
-         */
-        "interpTimeSeries"?: Point[];
-        /**
           * The time series data.
          */
         "timeSeries"?: Point[];
@@ -119,10 +107,6 @@ declare namespace LocalJSX {
           * Wavelet coefficients.
          */
         "coeffs"?: number[][];
-        /**
-          * Interpolated time series data.
-         */
-        "interpTimeSeries"?: Point[];
         /**
           * Time series data.
          */

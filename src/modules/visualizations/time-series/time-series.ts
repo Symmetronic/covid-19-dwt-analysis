@@ -10,17 +10,15 @@ const VALUE: string = 'Value';
 /**
  * Determines a Vega specification for visualizing a time series.
  * @param  timeSeries       Time series data.
- * @param  interpTimeSeries Interpolated time series data.
  * @param  coeffs           Wavelet coefficients.
  * @return                  Vega specification for visualizing a time series.
  */
 export function timeSeriesSpec(
   timeSeries: Point[],
-  interpTimeSeries: Point[],
   coeffs: number[][],
 ): any {
   /* Do nothing, if data is invalid. */
-  if (!timeSeries || !interpTimeSeries || !coeffs) return null;
+  if (!timeSeries || !coeffs) return null;
 
   const minTime: number = Math.min(...timeSeries.map(point => point[0]));
   const maxTime: number = Math.max(...timeSeries.map(point => point[0]));
@@ -39,49 +37,6 @@ export function timeSeriesSpec(
         },
         width: 'container',
         layer: [
-          {
-            data: {
-              values: interpTimeSeries.map(point => {
-                let value: any = {};
-                value[TIME] = new Date(1000 * point[0]);
-                value[VALUE] = point[1];
-                return value;
-              }),
-            },
-            mark: {
-              type: 'point',
-              filled: true,
-              size: 15,
-            },
-            encoding: {
-              x: {
-                field: TIME,
-                scale: {
-                  domain: [
-                    1000 * timeSeries[0][0],
-                    Date.now(),
-                  ]
-                },
-                type: 'temporal',
-              },
-              y: {
-                axis: {
-                  title: 'New Infections',
-                },
-                field: VALUE,
-                scale: {
-                  domain: [
-                    0,
-                    4/3 * Math.max(...timeSeries.map(point => point[1])),
-                  ]
-                },
-                type: 'quantitative',
-              },
-              color: {
-                value: '#333',
-              },
-            },
-          },
           {
             data: {
               values: timeSeries.map(point => {
@@ -107,10 +62,25 @@ export function timeSeriesSpec(
                   title: '',
                 },
                 field: TIME,
+                scale: {
+                  domain: [
+                    1000 * timeSeries[0][0],
+                    Date.now(),
+                  ],
+                },
                 type: 'temporal',
               },
               y: {
+                axis: {
+                  title: 'New Infections',
+                },
                 field: VALUE,
+                scale: {
+                  domain: [
+                    0,
+                    4/3 * Math.max(...timeSeries.map(point => point[1])),
+                  ],
+                },
                 type: 'quantitative',
               },
               color: {

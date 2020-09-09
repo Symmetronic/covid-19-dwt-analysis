@@ -7,11 +7,10 @@
 
 ## Properties
 
-| Property           | Attribute | Description                    | Type         | Default     |
-| ------------------ | --------- | ------------------------------ | ------------ | ----------- |
-| `coeffs`           | --        | Wavelet coefficients.          | `number[][]` | `undefined` |
-| `interpTimeSeries` | --        | Interpolated time series data. | `Point[]`    | `undefined` |
-| `timeSeries`       | --        | Time series data.              | `Point[]`    | `undefined` |
+| Property     | Attribute | Description           | Type         | Default     |
+| ------------ | --------- | --------------------- | ------------ | ----------- |
+| `coeffs`     | --        | Wavelet coefficients. | `number[][]` | `undefined` |
+| `timeSeries` | --        | Time series data.     | `Point[]`    | `undefined` |
 
 
 ## Dependencies

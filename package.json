@@ -2,7 +2,7 @@
   "name": "covid-19-dwt-analysis",
   "private": true,
   "author": "Simon Hochholzer <simon@symmetronic.com>",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Analysis of COVID-19 pandemic evolution using discrete wavelet transform.",
   "scripts": {
     "build": "stencil build",
@@ -27,8 +27,6 @@
   "dependencies": {
     "@stencil/redux": "^0.1.2",
     "discrete-wavelets": "^5.0.0",
-    "exact-linspace": "^1.0.0",
-    "interp1": "^1.0.5",
     "lodash": "^4.17.19",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",

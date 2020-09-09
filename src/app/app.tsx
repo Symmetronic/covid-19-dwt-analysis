@@ -11,7 +11,6 @@ import {
 
 import {
   setCoeffs,
-  setInterpTimeSeries,
   setTimeSeries,
 } from '../redux/actions';
 import { RootState } from '../redux/reducers';
@@ -32,11 +31,6 @@ export class AppRoot {
   setCoeffs: typeof setCoeffs = () => {};
 
   /**
-   * Method to set the interpolated time series data.
-   */
-  setInterpTimeSeries: typeof setInterpTimeSeries = () => {};
-
-  /**
    * Method to set the time series data.
    */
   setTimeSeries: typeof setTimeSeries = () => {};
@@ -45,29 +39,6 @@ export class AppRoot {
    * The wavelet coefficients.
    */
   @Prop({ mutable: true }) coeffs: number[][];
-
-  /**
-   * The interpolated time series data.
-   */
-  @Prop({ mutable: true }) interpTimeSeries: Point[];
-
-  /**
-   * Handles changes in the interpolated time series data.
-   * @param newValue New interpolated time series value.
-   */
-  @Watch('interpTimeSeries')
-  handleInterpTimeSeries(newValue: Point[]): void {
-    /* Determine coefficients. */
-    let coeffs: number[][] = null;
-
-    if (newValue) {
-      const ys: number[] = newValue.map(val => val[1]);
-      coeffs = wt.wavedec(ys, 'haar', 'constant');
-    }
-
-    /* Update coefficients. */
-    this.setCoeffs(coeffs);
-  }
 
   /**
    * The app's data model.
@@ -85,13 +56,7 @@ export class AppRoot {
    */
   @Watch('timeSeries')
   handleTimeSeries(newValue: Point[]): void {
-    /* Determine interpolated time series. */
-    let interpTimeSeries: Point[] = null;
-
-    if (newValue) interpTimeSeries = Data.interpTimeSeries(newValue);
-
-    /* Update interpolated time series. */
-    this.setInterpTimeSeries(interpTimeSeries);
+    this.updateCoeffs(newValue);
   }
 
   /**
@@ -118,12 +83,10 @@ export class AppRoot {
     /* Maps store values to component properties. */
     this.store.mapStateToProps(this, state => {
       const coeffs = state.data.coeffs;
-      const interpTimeSeries = state.data.interpTimeSeries;
       const timeSeries = state.data.timeSeries;
 
       return {
         coeffs,
-        interpTimeSeries,
         timeSeries,
       };
     });
@@ -131,7 +94,6 @@ export class AppRoot {
     /* Maps actions to properties. */
     this.store.mapDispatchToProps(this, {
       setCoeffs,
-      setInterpTimeSeries,
       setTimeSeries,
     });
   }
@@ -150,7 +112,7 @@ export class AppRoot {
    */
   progress(): number {
     const offset: number = 1;
-    const properties: string[] = ['coeffs', 'interpTimeSeries', 'timeSeries'];
+    const properties: string[] = ['coeffs', 'timeSeries'];
 
     const steps: number = properties.reduce((steps, property) => {
       return (this[property] === null || this[property] === undefined)
@@ -159,6 +121,23 @@ export class AppRoot {
     }, 0);
 
     return (steps + offset) / (properties.length + offset);
+  }
+
+  /**
+   * Updates coefficients.
+   * @param timeSeries Time series values.
+   */
+  updateCoeffs(timeSeries?: Point[]): void {
+    /* Determine coefficients. */
+    let coeffs: number[][] = null;
+
+    if (timeSeries) {
+      const ys: number[] = timeSeries.map(val => val[1]);
+      coeffs = wt.wavedec(ys, 'haar', 'constant');
+    }
+
+    /* Update coefficients. */
+    this.setCoeffs(coeffs);
   }
 
   /**
