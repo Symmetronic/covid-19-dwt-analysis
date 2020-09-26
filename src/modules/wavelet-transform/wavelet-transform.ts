@@ -1,4 +1,7 @@
-import wt from 'discrete-wavelets';
+import wt, {
+  PaddingMode,
+  Wavelet,
+} from 'discrete-wavelets';
 
 /**
  * Adapter class for wavelet transform dependency.
@@ -23,8 +26,8 @@ export default class WaveletTransform {
    */
   static wavedec(
     data: number[],
-    wavelet: string,
-    mode?: string,
+    wavelet: Wavelet,
+    mode?: PaddingMode,
   ): number[][] {
     return wt.wavedec(data, wavelet, mode);
   }
