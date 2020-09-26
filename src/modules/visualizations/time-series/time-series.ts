@@ -3,7 +3,6 @@ import { Point } from "../../data/data";
 const X_END: string = 'xEnd';
 const X_START: string = 'xStart';
 const LEVEL_OF_TRANSFORM = 'Level of Transform'
-const SCALE: string = 'Scale';
 const TIME: string = 'Time';
 const VALUE: string = 'Value';
 
@@ -22,6 +21,10 @@ export function timeSeriesSpec(
 
   const minTime: number = Math.min(...timeSeries.map(point => point[0]));
   const maxTime: number = Math.max(...timeSeries.map(point => point[0]));
+  const range: number = maxTime - minTime;
+  const deltaTime: number = range / (timeSeries.length - 1);
+  const xScale: number = range + deltaTime;
+  const offset: number = minTime - (deltaTime / 2);
 
   /* Remove approximation coefficients. */
   coeffs = coeffs.slice(1);
@@ -158,13 +161,12 @@ export function timeSeriesSpec(
         mark: 'rect',
         data: {
           values: coeffs.reverse().reduce((values, level, index) => {
-            const scale: number = (maxTime - minTime) / level.length;
+            const scale: number = xScale / level.length;
             for (let i: number = 0; i < level.length; i++) {
               const coeff: number = level[i];
               let value: any = {};
-              value[X_START] = new Date(1000 * (i * scale + minTime));
-              value[X_END] = new Date(1000 * ((i + 1) * scale + minTime));
-              value[SCALE] = scale;
+              value[X_START] = new Date(1000 * (i * scale + offset));
+              value[X_END] = new Date(1000 * ((i + 1) * scale + offset));
               value[LEVEL_OF_TRANSFORM] = index + 1;
               value[VALUE] = coeff;
               values.push(value);
