@@ -1,10 +1,12 @@
 import { Point } from "../../data/data";
+import WaveletTransform from '../../wavelet-transform/wavelet-transform';
 
 const X_END: string = 'xEnd';
 const X_START: string = 'xStart';
 const LEVEL_OF_TRANSFORM = 'Level of Transform'
 const TIME: string = 'Time';
 const VALUE: string = 'Value';
+const ENERGY: string = 'Energy';
 
 /**
  * Determines a Vega specification for visualizing a time series.
@@ -27,7 +29,7 @@ export function timeSeriesSpec(
   const offset: number = minTime - (deltaTime / 2);
 
   /* Remove approximation coefficients. */
-  coeffs = coeffs.slice(1);
+  const reversedDetailCoeffs: number[][] = coeffs.slice(1).reverse();
 
   /* Return Vega specification. */
   return {
@@ -61,9 +63,7 @@ export function timeSeriesSpec(
             },
             encoding: {
               x: {
-                axis: {
-                  title: '',
-                },
+                axis: { title: '' },
                 field: TIME,
                 scale: {
                   domain: [
@@ -160,7 +160,7 @@ export function timeSeriesSpec(
         width: 'container',
         mark: 'rect',
         data: {
-          values: coeffs.reverse().reduce((values, level, index) => {
+          values: reversedDetailCoeffs.reduce((values, level, index) => {
             const scale: number = xScale / level.length;
             for (let i: number = 0; i < level.length; i++) {
               const coeff: number = level[i];
@@ -176,9 +176,7 @@ export function timeSeriesSpec(
         },
         encoding: {
           x: {
-            axis: {
-              title: 'Date',
-            },
+            axis: { title: '' },
             field: X_START,
             type: 'temporal',
             scale: {
@@ -209,7 +207,43 @@ export function timeSeriesSpec(
             },
           },
         }
-      }
+      },
+      {
+        width: 'container',
+        mark: 'line',
+        data: {
+          values: timeSeries.map((point, index) => {
+            let sum: number = 0;
+            const maxLevel: number = reversedDetailCoeffs.length;
+            for (let i: number = 0; i < maxLevel; i++) {
+              const level: number = i + 1;
+              const coeffs: number[] = reversedDetailCoeffs[i];
+              sum += WaveletTransform.energy([
+                coeffs[Math.floor(index / Math.pow(2, level))]
+              ]);
+            }
+        
+            let value: any = {};
+            value[TIME] = new Date(1000 * point[0]);
+            value[ENERGY] = sum / Math.pow(2, maxLevel);
+            return value;
+          }),
+        },
+        encoding: {
+          x: {
+            axis: { title: 'Date' },
+            field: TIME,
+            type: 'temporal',
+            scale: { domain: { selection: 'grid' } },
+          },
+          y: {
+            axis: { title: 'Cumulative Energy' },
+            field: ENERGY,
+            type: 'quantitative',
+          },
+          color: { value: '#333' },
+        },
+      },
     ],
   };
 }
