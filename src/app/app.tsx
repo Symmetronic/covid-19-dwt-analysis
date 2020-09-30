@@ -159,7 +159,6 @@ export class AppRoot {
         />
 
         <strc-progress-bar
-          fadeOut={true}
           progress={progress}
         />
 
