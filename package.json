@@ -15,7 +15,7 @@
     "update-data": "npm --prefix ./update start"
   },
   "devDependencies": {
-    "@stencil/core": "^1.12.5",
+    "@stencil/core": "^2.0.3",
     "@stencil/sass": "^1.3.1",
     "@types/jest": "24.9.1",
     "@types/puppeteer": "2.0.1",
@@ -25,13 +25,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@stencil/redux": "^0.1.2",
+    "@stencil/redux": "^0.2.0",
     "discrete-wavelets": "^5.0.2",
     "lodash": "^4.17.19",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "strc-progress-bar": "^2.0.9",
+    "strc-progress-bar": "2.1.1",
     "tachyons-sass": "^4.9.5",
     "vega": "^5.10.1",
     "vega-embed": "^6.6.0",

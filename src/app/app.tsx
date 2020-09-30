@@ -1,6 +1,6 @@
 import { Component, h, Prop, Watch } from '@stencil/core';
 
-import { Store } from '@stencil/redux';
+import { store, Unsubscribe } from '@stencil/redux';
 
 import wt from '../modules/wavelet-transform/wavelet-transform';
 
@@ -13,8 +13,7 @@ import {
   setCoeffs,
   setTimeSeries,
 } from '../redux/actions';
-import { RootState } from '../redux/reducers';
-import { store } from '../redux/store';
+import { initialStore } from '../redux/store';
 
 /**
  * Root container of the app.
@@ -26,24 +25,9 @@ import { store } from '../redux/store';
 export class AppRoot {
 
   /**
-   * Method to set the coefficients.
-   */
-  setCoeffs: typeof setCoeffs = () => {};
-
-  /**
-   * Method to set the time series data.
-   */
-  setTimeSeries: typeof setTimeSeries = () => {};
-
-  /**
    * The wavelet coefficients.
    */
   @Prop({ mutable: true }) coeffs: number[][];
-
-  /**
-   * The app's data model.
-   */
-  @Prop({ context: 'store' }) store: Store<RootState>;
 
   /**
    * The time series data.
@@ -60,6 +44,21 @@ export class AppRoot {
   }
 
   /**
+   * Method to set the coefficients.
+   */
+  setCoeffs!: typeof setCoeffs;
+
+  /**
+   * Method to set the time series data.
+   */
+  setTimeSeries!: typeof setTimeSeries;
+
+  /**
+   * Unsubscribe from store.
+   */
+  unsubscribe!: Unsubscribe;
+
+  /**
    * The component is preparing to load.
    */
   componentWillLoad(): void {
@@ -74,14 +73,21 @@ export class AppRoot {
   }
 
   /**
+   * The component did unload.
+   */
+  disconnectCallback() {
+    this.unsubscribe();
+  }
+
+  /**
    * Initializes the app's data backend.
    */
   initStore(): void {
     /* Initializes the store. */
-    this.store.setStore(store);
+    store.setStore(initialStore);
 
     /* Maps store values to component properties. */
-    this.store.mapStateToProps(this, state => {
+    this.unsubscribe = store.mapStateToProps(this, state => {
       const coeffs = state.data.coeffs;
       const timeSeries = state.data.timeSeries;
 
@@ -92,7 +98,7 @@ export class AppRoot {
     });
 
     /* Maps actions to properties. */
-    this.store.mapDispatchToProps(this, {
+    store.mapDispatchToProps(this, {
       setCoeffs,
       setTimeSeries,
     });
@@ -116,8 +122,8 @@ export class AppRoot {
 
     const steps: number = properties.reduce((steps, property) => {
       return (this[property] === null || this[property] === undefined)
-          ? steps
-          : steps + 1;
+        ? steps
+        : steps + 1;
     }, 0);
 
     return (steps + offset) / (properties.length + offset);
@@ -153,7 +159,7 @@ export class AppRoot {
         />
 
         <strc-progress-bar
-          class={(progress < 1) ? null : 'fade-out'}
+          fadeOut={true}
           progress={progress}
         />
 

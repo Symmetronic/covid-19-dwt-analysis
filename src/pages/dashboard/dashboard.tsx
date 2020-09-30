@@ -1,14 +1,12 @@
 import { Component, h, Prop, State, Watch } from "@stencil/core";
 
-import { Store } from '@stencil/redux';
+import { store, Unsubscribe } from '@stencil/redux';
 
 import { Point } from "../../modules/data/data";
 import {
   coeffsSpec,
   timeSeriesSpec,
 } from '../../modules/visualizations/visualizations';
-
-import { RootState } from "../../redux/reducers";
 
 /**
  * Dashboard page.
@@ -35,14 +33,14 @@ export class Dashboard {
   @Prop({ mutable: true }) coeffs: number[][];
 
   /**
-   * The app's data backend.
-   */
-  @Prop({ context: 'store' }) store: Store<RootState>;
-
-  /**
    * Time series data.
    */
   @Prop({ mutable: true }) timeSeries: Point[];
+
+  /**
+   * Unsubscribe from store.
+   */
+  unsubscribe!: Unsubscribe;
 
   /**
    * The page is preparing to load.
@@ -54,10 +52,17 @@ export class Dashboard {
   }
 
   /**
+   * The page did unload.
+   */
+  disconnectCallback() {
+    this.unsubscribe();
+  }
+
+  /**
    * Initializes connection to the data backend. 
    */
   initStore(): void {
-    this.store.mapStateToProps(this, state => {
+    this.unsubscribe = store.mapStateToProps(this, state => {
       const coeffs = state.data.coeffs;
       const timeSeries = state.data.timeSeries;
 
