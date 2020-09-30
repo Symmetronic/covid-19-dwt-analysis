@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Point, } from "./modules/data/data";
+import { Point } from "./modules/data/data";
 export namespace Components {
     interface AppRoot {
         /**

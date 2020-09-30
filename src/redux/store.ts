@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'development') {
 /**
  * The global data storage, i.e. the app's model.
  */
-export const store: Store<RootState> = createStore(
+export const initialStore: Store<RootState> = createStore(
   root,
   applyMiddleware(...middlewares)
 );

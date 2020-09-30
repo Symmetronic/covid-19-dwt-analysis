@@ -45,18 +45,3 @@ strc-scaleogram {
   --strc-scaleogram-label-color: #{color(dark)};
   --strc-scaleogram-legend-width: #{$width-4};
 }
-
-/* Fade out animation. */
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-
-.fade-out {
-  animation-duration: duration(immediate);
-  animation-fill-mode: forwards;
-  animation-name: fadeOut;
-  animation-timing-function: ease-in-out;
-}
