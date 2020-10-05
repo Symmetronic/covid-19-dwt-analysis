@@ -40,6 +40,8 @@ export class AppRoot {
    */
   @Watch('timeSeries')
   handleTimeSeries(newValue: Point[]): void {
+    if (!newValue) return;
+    
     this.updateCoeffs(newValue);
   }
 
@@ -134,6 +136,8 @@ export class AppRoot {
    * @param timeSeries Time series values.
    */
   updateCoeffs(timeSeries?: Point[]): void {
+    if (!this.setCoeffs) return;
+
     /* Determine coefficients. */
     let coeffs: number[][] = null;
 
