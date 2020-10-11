@@ -2,7 +2,7 @@
   "name": "covid-19-dwt-analysis",
   "private": true,
   "author": "Simon Hochholzer <simon@symmetronic.com>",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Analysis of COVID-19 pandemic evolution using discrete wavelet transform.",
   "scripts": {
     "build": "stencil build",
