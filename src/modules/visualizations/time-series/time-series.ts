@@ -1,5 +1,5 @@
 import { Point } from "../../data/data";
-import WaveletTransform from '../../wavelet-transform/wavelet-transform';
+import wt from '../../wavelet-transform/wavelet-transform';
 
 const X_END: string = 'xEnd';
 const X_START: string = 'xStart';
@@ -11,15 +11,17 @@ const ENERGY: string = 'Energy';
 /**
  * Determines a Vega specification for visualizing a time series.
  * @param  timeSeries       Time series data.
+ * @param  interpTimeSeries Interpolated time series data.
  * @param  coeffs           Wavelet coefficients.
  * @return                  Vega specification for visualizing a time series.
  */
 export function timeSeriesSpec(
   timeSeries: Point[],
+  interpTimeSeries: Point[],
   coeffs: number[][],
 ): any {
   /* Do nothing, if data is invalid. */
-  if (!timeSeries || !coeffs) return null;
+  if (!timeSeries || !interpTimeSeries || !coeffs) return null;
 
   const minTime: number = Math.min(...timeSeries.map(point => point[0]));
   const maxTime: number = Math.max(...timeSeries.map(point => point[0]));
@@ -212,13 +214,13 @@ export function timeSeriesSpec(
         width: 'container',
         mark: 'line',
         data: {
-          values: timeSeries.map((point, index) => {
+          values: interpTimeSeries.map((point, index) => {
             let sum: number = 0;
             const maxLevel: number = reversedDetailCoeffs.length;
             for (let i: number = 0; i < maxLevel; i++) {
               const level: number = i + 1;
               const coeffs: number[] = reversedDetailCoeffs[i];
-              sum += WaveletTransform.energy([
+              sum += wt.energy([
                 coeffs[Math.floor(index / Math.pow(2, level))]
               ]);
             }

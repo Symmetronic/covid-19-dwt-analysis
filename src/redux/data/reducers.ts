@@ -4,6 +4,7 @@ import { Point } from '../../modules/data/data';
 
 export type DataState = {
   coeffs: number[][],
+  interpTimeSeries: Point[],
   timeSeries: Point[],
 };
 
@@ -16,6 +17,7 @@ export type DataState = {
 export const data = (
   state: DataState = {
     coeffs: null,
+    interpTimeSeries: null,
     timeSeries: null,
   },
   action: DataAction,
@@ -26,6 +28,13 @@ export const data = (
       return {
         ...state,
         coeffs,
+      };
+    }
+    case 'SET_INTERP_TIME_SERIES': {
+      const interpTimeSeries: Point[] = action.payload as Point[];
+      return {
+        ...state,
+        interpTimeSeries,
       };
     }
     case 'SET_TIME_SERIES': {

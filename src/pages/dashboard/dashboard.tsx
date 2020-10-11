@@ -33,6 +33,11 @@ export class Dashboard {
   @Prop({ mutable: true }) coeffs: number[][];
 
   /**
+   * Interpolated time series data.
+   */
+  @Prop({ mutable: true }) interpTimeSeries: Point[];
+
+  /**
    * Time series data.
    */
   @Prop({ mutable: true }) timeSeries: Point[];
@@ -64,10 +69,12 @@ export class Dashboard {
   initStore(): void {
     this.unsubscribe = store.mapStateToProps(this, state => {
       const coeffs = state.data.coeffs;
+      const interpTimeSeries = state.data.interpTimeSeries;
       const timeSeries = state.data.timeSeries;
 
       return {
         coeffs,
+        interpTimeSeries,
         timeSeries,
       };
     });
@@ -84,10 +91,13 @@ export class Dashboard {
   /**
    * Updates the specification of the time series visualization.
    */
+  @Watch('coeffs')
+  @Watch('interpTimeSeries')
   @Watch('timeSeries')
   updateTimeSeriesSpec(): void {
     this.timeSeriesSpec = timeSeriesSpec(
       this.timeSeries,
+      this.interpTimeSeries,
       this.coeffs,
     );
   }

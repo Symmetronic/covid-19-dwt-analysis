@@ -2,6 +2,7 @@ import { Component, h, Prop, Watch } from '@stencil/core';
 
 import { store, Unsubscribe } from '@stencil/redux';
 
+import Interpolation from '../modules/interpolation/interpolation';
 import wt from '../modules/wavelet-transform/wavelet-transform';
 
 import {
@@ -11,6 +12,7 @@ import {
 
 import {
   setCoeffs,
+  setInterpTimeSeries,
   setTimeSeries,
 } from '../redux/actions';
 import { initialStore } from '../redux/store';
@@ -30,6 +32,22 @@ export class AppRoot {
   @Prop({ mutable: true }) coeffs: number[][];
 
   /**
+   * The interpolated time series data.
+   */
+  @Prop({ mutable: true }) interpTimeSeries: Point[];
+
+  /**
+   * Handles changes in the interpolated time series data.
+   * @param newValue New interpolated time series value.
+   */
+  @Watch('interpTimeSeries')
+  handleInterpTimeSeries(newValue: Point[]): void {
+    if (!newValue) return;
+
+    this.updateCoeffs(newValue);
+  }
+
+  /**
    * The time series data.
    */
   @Prop({ mutable: true }) timeSeries: Point[];
@@ -42,13 +60,18 @@ export class AppRoot {
   handleTimeSeries(newValue: Point[]): void {
     if (!newValue) return;
     
-    this.updateCoeffs(newValue);
+    this.updateInterpTimeSeries(newValue);
   }
 
   /**
    * Method to set the coefficients.
    */
   setCoeffs!: typeof setCoeffs;
+
+  /**
+   * Method to set the interpolated time series data.
+   */
+  setInterpTimeSeries!: typeof setInterpTimeSeries;
 
   /**
    * Method to set the time series data.
@@ -91,10 +114,12 @@ export class AppRoot {
     /* Maps store values to component properties. */
     this.unsubscribe = store.mapStateToProps(this, state => {
       const coeffs = state.data.coeffs;
+      const interpTimeSeries = state.data.interpTimeSeries;
       const timeSeries = state.data.timeSeries;
 
       return {
         coeffs,
+        interpTimeSeries,
         timeSeries,
       };
     });
@@ -102,6 +127,7 @@ export class AppRoot {
     /* Maps actions to properties. */
     store.mapDispatchToProps(this, {
       setCoeffs,
+      setInterpTimeSeries,
       setTimeSeries,
     });
   }
@@ -111,7 +137,9 @@ export class AppRoot {
    * @return Promise that resolves, once the data is loaded.
    */
   async loadData(): Promise<void> {
-    return Data.getData().then(timeSeries => this.setTimeSeries(timeSeries));
+    return Data.getData().then(timeSeries => {
+      this.setTimeSeries(timeSeries);
+    });
   }
 
   /**
@@ -120,7 +148,7 @@ export class AppRoot {
    */
   progress(): number {
     const offset: number = 1;
-    const properties: string[] = ['coeffs', 'timeSeries'];
+    const properties: string[] = ['coeffs', 'interpTimeSeries', 'timeSeries'];
 
     const steps: number = properties.reduce((steps, property) => {
       return (this[property] === null || this[property] === undefined)
@@ -133,7 +161,7 @@ export class AppRoot {
 
   /**
    * Updates coefficients.
-   * @param timeSeries Time series values.
+   * @param timeSeries Time series data.
    */
   updateCoeffs(timeSeries?: Point[]): void {
     if (!this.setCoeffs) return;
@@ -148,6 +176,26 @@ export class AppRoot {
 
     /* Update coefficients. */
     this.setCoeffs(coeffs);
+  }
+
+  /**
+   * Updates the interpolated time series data.
+   * @param timeSeries Time series data.
+   */
+  updateInterpTimeSeries(timeSeries?: Point[]): void {
+    if (!this.setInterpTimeSeries) return;
+
+    /* Determine interpolated time series. */
+    let interpTimeSeries: Point[] = null;
+
+    if (timeSeries) {
+      const nextPowerOfTwo: number = Math.pow(
+          2, Math.ceil(Math.log2(timeSeries.length)));
+      interpTimeSeries = Interpolation.sample(timeSeries, nextPowerOfTwo);
+    }
+
+    /* Update interpolated time series data. */
+    this.setInterpTimeSeries(interpTimeSeries);
   }
 
   /**
