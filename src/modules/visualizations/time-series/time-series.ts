@@ -101,19 +101,11 @@ export function timeSeriesSpec(
                   when: new Date(2020, 2, 23, 0, 0, 0, 0),
                 },
                 {
-                  event: '1st deregulations',
+                  event: 'deregulations',
                   when: new Date(2020, 3, 20, 0, 0, 0, 0),
                 },
                 {
-                  event: '2nd deregulations',
-                  when: new Date(2020, 4, 4, 0, 0, 0, 0),
-                },
-                {
-                  event: '3rd deregulations',
-                  when: new Date(2020, 5, 5, 0, 0, 0, 0),
-                },
-                {
-                  event: 'Corona app',
+                  event: 'Warn-App',
                   when: new Date(2020, 5, 15, 0, 0, 0, 0),
                 },
               ],
