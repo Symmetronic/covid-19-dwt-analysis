@@ -97,7 +97,7 @@ export function timeSeriesSpec(
             data: {
               values: [
                 {
-                  event: 'curfew laws',
+                  event: 'lockdown',
                   when: new Date(2020, 2, 23, 0, 0, 0, 0),
                 },
                 {
@@ -107,6 +107,10 @@ export function timeSeriesSpec(
                 {
                   event: 'Warn-App',
                   when: new Date(2020, 5, 15, 0, 0, 0, 0),
+                },
+                {
+                  event: 'lockdown',
+                  when: new Date(2020, 10, 2, 0, 0, 0, 0),
                 },
               ],
             },
