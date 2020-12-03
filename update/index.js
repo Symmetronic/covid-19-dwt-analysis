@@ -27,8 +27,8 @@ const SCHEMA = Joi.array().items(
   Joi.object({
     'Country/Region': Joi.string(),
     'Province/State': Joi.string().allow(null),
-    Lat: Joi.number(),
-    Long: Joi.number(),
+    Lat: Joi.number().allow(null),
+    Long: Joi.number().allow(null),
   }).pattern(/^1?[0-9]\/[1-3]?[0-9]\/\d+$/, Joi.number()),
 );
 
