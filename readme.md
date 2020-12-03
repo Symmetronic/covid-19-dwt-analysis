@@ -12,3 +12,4 @@ Analysis of COVID-19 pandemic evolution using discrete wavelet transform.
 - `npm test`: Run tests once
 - `npm run test:watch`: Run tests in interactive watch mode
 - `npm run test:jekyll`: Test if the app would run on a Jekyll server like GitHub pages
+- `npm run update-data`: Updates the data values
