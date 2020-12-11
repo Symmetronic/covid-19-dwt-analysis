@@ -7,12 +7,13 @@
   "scripts": {
     "build": "stencil build",
     "generate": "stencil generate",
-    "postinstall": "npm --prefix ./update install ./update",
+    "install:update": "cd update && npm install && cd ..",
+    "postinstall": "npm run install:update",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test:jekyll": "npm run build && jekyll serve --source www/covid-19-dwt-analysis --destination www/covid-19-dwt-analysis/_site --safe",
     "test:watch": "stencil test --spec --e2e --watchAll",
-    "update-data": "npm --prefix ./update start"
+    "update-data": "cd update && npm start && cd .."
   },
   "devDependencies": {
     "@stencil/core": "^2.0.3",
