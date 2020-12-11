@@ -1,10 +1,6 @@
 name: update
 
 on:
-  # TODO: Remove later!
-  push:
-    branches:
-      - development
   schedule:
     # 02:05 am
     - cron: '5 2 * * *'
