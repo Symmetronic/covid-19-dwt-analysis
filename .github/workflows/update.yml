@@ -39,8 +39,7 @@ jobs:
     - name: Commit data
       run: |
         git add src/assets/data/data.json
-        git commit --message "Autoupdate data"
-        exit 0
+        git diff-index --quiet HEAD || git commit --message "Autoupdate data"
 
     - name: Push changes
       uses: ad-m/github-push-action@master
