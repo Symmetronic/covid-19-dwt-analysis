@@ -1,0 +1,48 @@
+name: update
+
+on:
+  # TODO: Remove later!
+  push:
+    branches:
+      - development
+  schedule:
+    # 02:05 am
+    - cron: '5 2 * * *'
+
+jobs:
+  update:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Install dependencies
+      run: npm run install:update
+
+    - name: Fetch data
+      run: npm run update-data
+
+    - name: Configure Git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+
+    - name: Commit data
+      run: |
+        git add src/assets/data/data.json
+        git commit --message "Autoupdate data"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: master
