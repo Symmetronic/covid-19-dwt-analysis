@@ -40,6 +40,7 @@ jobs:
       run: |
         git add src/assets/data/data.json
         git commit --message "Autoupdate data"
+        exit 0
 
     - name: Push changes
       uses: ad-m/github-push-action@master
