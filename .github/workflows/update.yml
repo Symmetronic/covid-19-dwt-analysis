@@ -2,8 +2,8 @@ name: Update data
 
 on:
   schedule:
-    # 02:05 am
-    - cron: '5 2 * * *'
+    # 07:35 am
+    - cron: '35 7 * * *'
 
 jobs:
   update:
