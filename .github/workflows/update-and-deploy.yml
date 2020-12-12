@@ -1,12 +1,15 @@
-name: Deploy
+name: Update and Deploy
 
 on:
   push:
     branches:
       - master
+  schedule:
+    # 07:35 am
+    - cron: '35 7 * * *'
 
 jobs:
-  deploy:
+  update-and-deploy:
 
     runs-on: ubuntu-latest
 
@@ -14,7 +17,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         persist-credentials: false
-
+    
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
@@ -32,6 +35,17 @@ jobs:
 
     - name: Install dependencies
       run: npm ci
+
+    - name: Fetch data
+      run: npm run update-data
+
+    - name: Commit and push data
+      run: |
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "actions@github.com"
+        git add src/assets/data/data.json
+        git diff-index --quiet HEAD || git commit --message "Autoupdate data"
+        git push
 
     - name: Run tests
       run: npm test
