@@ -1,4 +1,4 @@
-[![Deploy Action](https://github.com/Symmetronic/covid-19-dwt-analysis/workflows/Deploy/badge.svg?branch=master)](https://github.com/Symmetronic/covid-19-dwt-analysis/actions?query=workflow%3ADeploy+branch%3Amaster) [![Update Data Action](https://github.com/Symmetronic/covid-19-dwt-analysis/workflows/Update%20data/badge.svg?branch=master)](https://github.com/Symmetronic/covid-19-dwt-analysis/actions?query=workflow%3A%22Update+data%22+branch%3Amaster)
+[![Update and Deploy](https://github.com/Symmetronic/covid-19-dwt-analysis/workflows/Update%20and%20Deploy/badge.svg?branch=master)](https://github.com/Symmetronic/covid-19-dwt-analysis/actions?query=workflow%3A%22Update+and+Deploy%22+branch%3Amaster)
 
 # COVID-19 Discrete Wavelet Transform (DWT) Analysis
 
