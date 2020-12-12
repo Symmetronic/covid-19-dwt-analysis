@@ -1,6 +1,10 @@
 name: Update data
 
 on:
+  # TODO: Remove later
+  push:
+    branches:
+      - master
   schedule:
     # 07:35 am
     - cron: '35 7 * * *'
