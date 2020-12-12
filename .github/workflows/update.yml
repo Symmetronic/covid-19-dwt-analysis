@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+          persist-credentials: false
     
     - name: Use Node.js
       uses: actions/setup-node@v1
@@ -28,10 +30,15 @@ jobs:
     - name: Fetch data
       run: npm run update-data
 
-    - name: Commit and push data
+    - name: Commit data
       run: |
         git config --local user.name "GitHub Actions"
         git config --local user.email "actions@github.com"
         git add src/assets/data/data.json
         git diff-index --quiet HEAD || git commit --message "Autoupdate data"
-        git push
+
+    - name: Push changes
+          uses: ad-m/github-push-action@v0.6.0
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: master
