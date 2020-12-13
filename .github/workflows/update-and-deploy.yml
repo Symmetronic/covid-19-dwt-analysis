@@ -5,8 +5,8 @@ on:
     branches:
       - master
   schedule:
-    # 07:35 am
-    - cron: '35 7 * * *'
+    # 06:35 am UTC
+    - cron: '35 6 * * *'
 
 jobs:
   update-and-deploy:
