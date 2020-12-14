@@ -109,8 +109,12 @@ export function timeSeriesSpec(
                   when: new Date(2020, 5, 15, 0, 0, 0, 0),
                 },
                 {
-                  event: 'lockdown',
+                  event: 'lockdown light',
                   when: new Date(2020, 10, 2, 0, 0, 0, 0),
+                },
+                {
+                  event: 'lockdown',
+                  when: new Date(2020, 11, 16, 0, 0, 0, 0),
                 },
               ],
             },
