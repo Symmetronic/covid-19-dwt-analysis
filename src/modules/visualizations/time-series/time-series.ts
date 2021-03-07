@@ -116,6 +116,10 @@ export function timeSeriesSpec(
                   event: 'lockdown',
                   when: new Date(2020, 11, 16, 0, 0, 0, 0),
                 },
+                {
+                  event: 'partial deregulations',
+                  when: new Date(2021, 2, 8, 0, 0, 0, 0),
+                }
               ],
             },
             encoding: {
