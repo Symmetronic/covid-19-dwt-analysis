@@ -44,6 +44,7 @@ jobs:
         git add src/assets/data/data.json
         git diff-index --quiet HEAD || git commit --message "Autoupdate data"
         git push
+        git restore .
 
     - name: Run tests
       run: npm test
