@@ -32,7 +32,9 @@ jobs:
           ${{ runner.OS }}-
 
     - name: Install dependencies
-      run: npm ci
+      run: |
+        npm ci
+        git restore .
 
     - name: Fetch data
       run: npm run update-data
