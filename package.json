@@ -30,7 +30,7 @@
     "discrete-wavelets": "^5.0.7",
     "exact-linspace": "^1.0.7",
     "interp1": "^1.0.13",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
