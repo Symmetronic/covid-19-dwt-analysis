@@ -3,7 +3,7 @@ name: Update and Deploy
 on:
   push:
     branches:
-      - master
+      - main
   schedule:
     # 06:35 am UTC
     - cron: '35 6 * * *'
